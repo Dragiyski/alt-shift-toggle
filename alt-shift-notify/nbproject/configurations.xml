@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="100">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+      <itemPath>KeyScanner.hpp</itemPath>
+      <itemPath>SubscriberList.hpp</itemPath>
+      <itemPath>UDevContext.hpp</itemPath>
+      <itemPath>UDevDevice.hpp</itemPath>
+      <itemPath>filesystem.hpp</itemPath>
+      <itemPath>global.hpp</itemPath>
+      <itemPath>process-tag.hpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <itemPath>KeyScanner.cpp</itemPath>
+      <itemPath>SubscriberList.cpp</itemPath>
+      <itemPath>UDevContext.cpp</itemPath>
+      <itemPath>UDevDevice.cpp</itemPath>
+      <itemPath>main.cpp</itemPath>
+      <itemPath>process-tag.cpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <compilerSet>GCC-7|GNU</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <ccTool>
+          <commandLine>-std=c++17</commandLine>
+        </ccTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerOptionItem>-lstdc++fs</linkerOptionItem>
+            <linkerOptionItem>-pthread</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs libudev`</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <item path="KeyScanner.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="KeyScanner.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="SubscriberList.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="SubscriberList.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="UDevContext.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="UDevContext.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="UDevDevice.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="UDevDevice.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="filesystem.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="global.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="process-tag.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="process-tag.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <compilerSet>GCC-7|GNU</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+          <commandLine>-std=c++17</commandLine>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerOptionItem>-lstdc++fs</linkerOptionItem>
+            <linkerOptionItem>-pthread</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs libudev`</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <item path="KeyScanner.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="KeyScanner.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="SubscriberList.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="SubscriberList.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="UDevContext.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="UDevContext.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="UDevDevice.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="UDevDevice.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="filesystem.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="global.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="process-tag.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="process-tag.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>

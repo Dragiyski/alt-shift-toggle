@@ -1,0 +1,14 @@
+[Unit]
+Description=Alt+Shift Toggle Notify
+After=local-fs.target
+After=systemd-udevd.service
+Requires=systemd-udevd.service
+Requires=local-fs.target
+
+[Service]
+ExecStart=/usr/local/bin/alt_shift_notify
+Type=simple
+
+[Install]
+WantedBy=user-1000.slice
+

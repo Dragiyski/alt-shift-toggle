@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Exec=xkb_next_layout --fork
+Hidden=false
+X-MATE-Autostart-enabled=true
+Name[en_US]=xkb-next-layout
+Name=xkb-next-layout
+Comment[en_US]=Allow switching keyboard layout with Alt+Shift properly
+Comment=Allow switching keyboard layout with Alt+Shift properly

@@ -11,16 +11,16 @@ What's the difference with standard Alt+Shift in Linux. Step 3 occurs on keyup e
 
 If step `3b` occurs, language is not switched and switching language is canceled until both Alt and Shift keys are released. This allows programs using keyboard shortcuts like (Alt+Shift+F) do not interfere with a keyboard language switch.
 
-== The problem ==
+# The problem
 This started as removing the annoying issue with xkb on linux. Issue existed in the year 2007 and still lives, although a patch is included. 
 The ignorance of the xkb developers in making language switch with the same behavior like windows, over the "standardizing" some syntax.
 More about the issue can be read here: https://bugs.freedesktop.org/show_bug.cgi?id=865
 
-== This solution ==
+# This solution
 
 This solution is made out of two separate programs intended to communicate each other. A summary of what the programs do:
 
-=== ``alt-shift-notify`` ===
+## ``alt-shift-notify``
 
 This is a program that does the following:
 
@@ -31,17 +31,17 @@ This is a program that does the following:
 
 This program is installed as `systemd` service and creates a PID file in ``/var/pid``.
 
-=== ``xkb-next-layout`` ===
+## ``xkb-next-layout``
 
 This program finds the PID file of the ``alt-shift-notify`` and register itself (sending `SIGUSR1`). When the program receives `SIGUSR1` signal, it finds the next input group (keyboard layout) and switch it using ``XkbLockGroup`` from `xkb` library.
 
-== More info ==
+# More info
 
 Why this is performed by two programs? Unfortunately, what ``alt-shift-notify`` does can be done only by the root user (it would be security issue if any other user can do that). Accessing raw state of the keyboard can be used for keyboard loggers used to steal passwords. Therefore it is strong recommendation to examine the code of this program before install it (don't just trust random github user).
 
 But `root` user can access everything, why `xkb-next-layout` program is needed? The answer is timing... The services started by `systemd` starts way before a program can connect to the X server (in fact it starts before X server is started, but even using systemd dependencies, X server takes time before it can initialize connections). As a result any attempt by the root user will fail. Moreover, even if X connection is made on demand, it is likely X is started on login using the user's `.Xauthority` file. If a single program is used, the root user must also include `.Xauthority` which is both unusual configuration for a user machine and requires a more elaborate installation process. If two programs are used, the `xkb-next-layout` can be installed as a startup program on user level, while `alt-shift-notify` can be installed and started earlier on system initialization. Both of these are really easy and semi-portable between multiple X environment.
 
-== Installation ==
+# Installation
 
 Both programs are build and installed using `cmake`.
 
@@ -62,7 +62,7 @@ To install `xkb-next-layout` do:
 
 * This should add ``setcap cap_kill=ep <prefix>/xkb_next_layout`` capability to the program. Without this capability, signals cannot be send to unrelated (non-parent/non-child) processes. This program will only send `SIGUSR1` AND `SIGUSR2` only to the `alt-shift-notify` process (never broadcasted), so it should not affect any other programs. However, it is good idea to check the source before use it, since sending signals can be used in malicious way (a program with `cap_kill` can send `SIGKILL` to ANY program, so do not trust blindly, check if only `SIGUSR1` and `SIGUSR2` are send only to the intended program).
 
-== Conclusion ==
+# Conclusion
 This problem should not be so difficult to solve, but unfortunately, the only people that suffer from this problem are those that use non-latin keyboard. However, both arabic and kanji-based languages seems to have separate solution, so switching keyboard layout for non-latin alphabets like cyrillic seems to be a problem affecting minority of linux users. On the top of that, a user can easily adjust to non-modifier-only keyboard layout switching (like Win+Space), so this problem will affect a minority the above minority that refuses to switch from modifiers-only keyboard layout switching introduced in Windows operating system.
 
 Even with the above problem, the default switcher (Alt+Shift) works most of the time, with the following caveats:

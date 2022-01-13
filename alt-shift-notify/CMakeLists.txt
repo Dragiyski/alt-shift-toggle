@@ -1,33 +1,10 @@
 cmake_minimum_required(VERSION 3.0)
-project(alt_shift_notify CXX)
+project(alt_shift_notify NONE)
 
-set(CMAKE_CXX_STANDARD 17)
+find_package(Python3 REQUIRED COMPONENTS Interpreter)
 
-include_directories(.)
+execute_process(COMMAND "${Python3_EXECUTABLE}" "-m" "venv" "venv" WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
 
-find_package(Threads REQUIRED)
-find_package(PkgConfig REQUIRED)
+configure_file("${CMAKE_SOURCE_DIR}/requirements.txt" "${CMAKE_BINARY_DIR}/requirements.txt" COPYONLY)
 
-pkg_search_module(UDEV REQUIRED libudev)
-
-add_executable(alt_shift_notify
-        filesystem.hpp
-        global.hpp
-        KeyScanner.cpp
-        KeyScanner.hpp
-        main.cpp
-        process-tag.cpp
-        process-tag.hpp
-        static-sequences.hpp
-        SubscriberList.cpp
-        SubscriberList.hpp
-        UDevContext.cpp
-        UDevContext.hpp
-        UDevDevice.cpp
-        UDevDevice.hpp)
-
-target_include_directories(alt_shift_notify SYSTEM PUBLIC ${UDEV_INCLUDE_DIRS})
-
-target_link_libraries(alt_shift_notify ${CMAKE_THREAD_LIBS_INIT} stdc++fs ${UDEV_LIBRARIES})
-
-install(TARGETS alt_shift_notify RUNTIME DESTINATION bin)
+execute_process(COMMAND "${CMAKE_BINARY_DIR}/venv/bin/python" "-m" "pip" "install" "-r" "requirements.txt" WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")

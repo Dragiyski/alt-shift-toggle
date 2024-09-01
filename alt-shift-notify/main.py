@@ -92,12 +92,15 @@ class AltShiftNotify(threading.Thread):
 def send_notification():
     if is_verbose:
         print('Alt+Shift detected')
-    for pid in subscriber_list:
+    subscribers = list(subscriber_list)
+    for pid in subscribers:
         if is_verbose:
             print(f'Sending SIGUSR1 to {pid}')
         try:
             os.kill(pid, signal.SIGUSR1)
         except ProcessLookupError:
+            if is_verbose:
+                print(f'Removing missing subscriber: {pid}')
             subscriber_list.remove(pid)
 
 def enumate_keyboard_event_devices(context: pyudev.Context):

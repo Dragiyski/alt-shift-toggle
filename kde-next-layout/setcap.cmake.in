@@ -1,0 +1,13 @@
+set(DESTINATION_EXECUTABLE @DESTINATION_EXECUTABLE@)
+
+find_program(SETCAP setcap NO_CMAKE_ENVIRONMENT_PATH NO_CMAKE_PATH NO_CMAKE_SYSTEM_PATH NO_CMAKE_FIND_ROOT_PATH)
+
+if(NOT SETCAP)
+    message(WARNING "Unable to find setcap, the xkb_next_layout might be unable to communicate with alt_shift_notify")
+else(NOT SETCAP)
+    execute_process(COMMAND ${SETCAP} cap_kill=ep ${DESTINATION_EXECUTABLE} RESULT_VARIABLE SETCAP_RESULT)
+
+    if(NOT SETCAP_RESULT EQUAL 0)
+        message(WARNING "Unable to set cap_kill capabilities to xbk_next_layout, please run:\nsetcap cap_kill=ep ${DESTINATION_EXECUTABLE}")
+    endif(NOT SETCAP_RESULT EQUAL 0)
+endif(NOT SETCAP)

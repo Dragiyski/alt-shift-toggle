@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
-import distutils.file_util
+import shutil
 import os
 import pathlib
 import subprocess
@@ -22,8 +22,8 @@ if __name__ == '__main__':
     print(f'Target Directory: {cwd}')
 
     if cwd != sd:
-        distutils.file_util.copy_file(sd.joinpath('main.py'), cwd.joinpath('main.py'), update=1, verbose=1)
-        distutils.file_util.copy_file(sd.joinpath('requirements.txt'), cwd.joinpath('requirements.txt'), update=1, verbose=1)
+        shutil.copyfile(sd.joinpath('main.py'), cwd.joinpath('main.py'))
+        shutil.copyfile(sd.joinpath('requirements.txt'), cwd.joinpath('requirements.txt'))
 
     env_builder = venv.EnvBuilder(clear=True, symlinks=False, system_site_packages=False, with_pip=True)
     env_builder.create(cwd.joinpath('venv'))
@@ -41,4 +41,4 @@ if __name__ == '__main__':
 
     with open(cwd.joinpath('alt-shift-notify.service'), mode='w') as file:
         file.write(service_script)
-    distutils.file_util.copy_file(cwd.joinpath('alt-shift-notify.service'), '/etc/systemd/system/alt-shift-notify.service', update=1, link='sym')
+    shutil.copyfile(cwd.joinpath('alt-shift-notify.service'), '/etc/systemd/system/alt-shift-notify.service')
